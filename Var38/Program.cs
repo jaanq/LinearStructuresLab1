@@ -8,8 +8,14 @@ namespace Var38
         {
             Stack stack = new Stack(5);
             stack.Push(1);
-            stack.Pop();
-            Console.WriteLine(stack.Peek());
+            stack.Push(10);
+            stack.Push(22);
+            stack.Push(2);
+            stack.Push(5);
+            stack.Push(100);
+            stack.Show();
+            Stack.QSort(stack.ToArray());
+            stack.Show();
         }
     }
 }
