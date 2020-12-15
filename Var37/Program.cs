@@ -7,7 +7,7 @@ namespace Var37 // Массив, Очередь, Квиксорт
         static internal ulong N_op;
         static void Main(string[] args)
         {
-            foreach (int N in new int[] { 3000, 60000, 120000, 240000, 4800000, 9600000, 19200000, 38400000 }) {
+            foreach (int N in new int[] { 3400, 60000, 120000, 240000, 480000, 960000, 1920000, 3840000 }) {
                 N_op = 0;
                 Queue1 qu = new Queue1(N);
                 AddNrandoms(qu, N);
@@ -16,7 +16,8 @@ namespace Var37 // Массив, Очередь, Квиксорт
                 Queue1.StartQSort(ref qu);
                 double time = (DateTime.Now - before).TotalMilliseconds;
 
-                Console.WriteLine($"N: {N} TotalMilliseconds: {time} N_ops:{N_op}");
+                Console.WriteLine($"N: {N}    TotalMilliseconds: {time}    N_ops:{N_op}");
+                
             }
         }
 
@@ -24,7 +25,7 @@ namespace Var37 // Массив, Очередь, Квиксорт
         {
             for (int i = 0; i < count; i++)
             {
-                q.AddLast(rnd.Next(1, 1000000));
+                q.AddLast(rnd.Next(1, 100));
             }
         }
     }
