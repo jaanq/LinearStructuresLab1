@@ -5,58 +5,70 @@ namespace Var38
     class Stack
     {
         int[] storage; // 0 <=> null <=> None <=> non-init <=> пусто
-        int head_pos_cur; // Текущая позиция головки
-        int head_pos_max; // Максимальная позиция головки
+        int slot; // Индекс головы стэка, куда и будет добавлять/убираться элемент.
         int size = 0; // Текущее кол-во элементов
-        public Stack(int n)
+        public Stack(int n) // Добавление по-одному очень медленно для кучи чисел, каждый раз двигать надо
         {
             storage = new int[n];
             for (int i = 0; i < n; i++) { storage[i] = 0; } // Заполняем пустыми значениями
-            head_pos_max = n - 1;
-            head_pos_cur = n; // При обращении к головке используется "-1" => ставим текущую на ='n'
+            slot = n - 1;
+        }
+        public Stack(int[] array) // Добавление по-одному очень медленно для кучи чисел, каждый раз двигать надо
+        {
+            storage = array;
+            slot = array.Length - 1;
         }
 
-        public void Push(int item)
+        public void Push(int item) // Метод добавления элемента в голову
         {
-            if (head_pos_cur == 0 & storage[0] == 0) // Если мы в конце очереди и конец пустой
-            { // Без этого условия можно было бы изменять конец заполненной очереди
-                storage[head_pos_cur - 1] = item;
-                size++;
-            }
-            if (head_pos_cur != 0)
-            {
-                storage[head_pos_cur - 1] = item;
-                head_pos_cur--;
-                size++;
+            if (size != Length()) // Если есть свободное место
+            {   // Сдвиг на 1 влево чтобы в голову вставить элемент
+                for (int i = 0; i < Length()-1; i++) // Цикл вперёд
+                {
+                    storage[i] = storage[i + 1]; // Текущий равен следующему, сдвиг на 1 влево => голова освобождается
+                }
+                storage[slot] = item; // Присваиваем опустевшей голове новое значение
             }
         }
-        public int Pop()
+        public int Pop() // Метод удаления с головы
         {
-            int toReturn = storage[head_pos_max]; // Макс, тк очередь двигается к правому краю
+            int toReturn = storage[slot]; // Макс, тк стэк двигается к правому краю
 
-            storage[head_pos_cur] = 0;
-            size--;
-            if (head_pos_cur != head_pos_max)
+            // Сдвиг на 1 вправо , чтобы заполнить пустоту от элемента, который ушёл с головы
+            for (int i = slot; i > 0; i--) // Цикл назад
             {
-                head_pos_cur++;
-            }
+                storage[i] = storage[i - 1]; // Текущий равен предыдущему (сдвиг на 1 вправо)
+                if (i == 1) { storage[0] = 0; } // Дошли до конца -> обнулить нулевой индекс, отдельно
+            }                                     // т.к. обращаемся в цикле к [i-1] и может ошибка быть
+            // Очередь полностью сдвинулась на 1 влево, т.е. [max] пусто
+            size--; // Попнули один => сайз уменьшился
+            //head_pos_cur++;
             return toReturn;
         }
-        public int Peek()
+        public int Peek() // Вернёт голову без удаления. Для удовлетворения АТД.
         {
-            return storage[head_pos_cur];
+            return storage[slot];
         }
-        public int Length() { return head_pos_max+1; }
-        public void Show()
+        public int Length() { return slot+1; } // Возвратит общий возможный размер стэка.
+        public void Show() // Выведет стэк в строку
         {
             foreach (int x in storage){
                 Console.Write(x + " ");
             }
             Console.WriteLine();
         }
-        public int[] ToArray()
+        public int[] ToArray() // Вернёт сам массив
         {
             return storage;
+        }
+        public bool isEmpty() // Метод проверки на пустоту. Для соответствия АТД.
+        {
+            foreach (int x in storage)
+            {
+                if (x != 0) { return false; } // Нули = пустота. Есть не ноль = не пустой
+                return true;
+            }
+            return true;
         }
 
 
@@ -65,7 +77,10 @@ namespace Var38
         // Sorting block
         static internal void StartQSort(ref Stack st) // Метод для запуска сортировки
         {
-            QSort(st.ToArray());
+            QSort(st.ToArray()); // ____!!!!! Можно конечно сразу в мэине вызывать эту строку, но я помню
+                                 // ____!!!!! что препод говорил не использовать костыльные переводы в массив,
+                                 // ____!!!!! поэтому конвертация в массив инкапсулируется внутри самого класса стэка
+                                 // ____!!!!! и никаких конвертаций в мэине не происходит
         }
         static void Swap(ref int a, ref int b)
         {

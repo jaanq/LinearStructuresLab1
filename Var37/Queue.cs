@@ -71,7 +71,7 @@ namespace Var37
         {
             return storage;
         }
-        public bool isEmpty() // Метод првоерки на пустоту. Для соответствия АТД.
+        public bool isEmpty() // Метод проверки на пустоту. Для соответствия АТД.
         {
             foreach (int x in storage)
             {

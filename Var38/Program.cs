@@ -7,25 +7,26 @@ namespace Var38
         static Random rnd = new Random();
         static void Main(string[] args)
         {
-            foreach (int N in new int[] { 3000, 60000, 120000, 240000, 480000, 9600000 })
-            {
-                Stack st = new Stack(N);
-                AddNrandoms(st, N);
-
-                DateTime before = DateTime.Now;
-                Stack.StartQSort(ref st);
-                double time = (DateTime.Now - before).TotalMilliseconds;
-
+            foreach (int N in new int[] { 3000, 60000, 120000, 240000, 480000, 9600000 }) // Шаг Nx20, время N*logN
+            { // В цикле перебираем разные N и запрашиваем массив такой же длиной, передаём в стэк
+                Stack st = new Stack(RandomArrayWithLength(N)); // Вернёт рандомный массив длины N и отправит в конструтор
+            
+                DateTime before = DateTime.Now; // Запоминается текущее время
+                Stack.StartQSort(ref st); // Старт сортировки 
+                double time = (DateTime.Now - before).TotalMilliseconds; // !Текущее! время минус запомненное
+            
                 Console.WriteLine($"N: {N} TotalMilliseconds: {time}");
             }
         }
 
-        static void AddNrandoms(Stack q, int count)
+        static int[] RandomArrayWithLength(int count)
         {
-            for (int i = 0; i < count; i++)
+            int[] array = new int[count]; // Создадим пустой массив нужной длины
+            for (int i = 0; i < count; i++) // В цикле прогоним все числа
             {
-                q.Push(rnd.Next(1, 1000000));
+                array[i] = rnd.Next(1, 1000000); // По индексу добавляем рандомное число в жтом промежутке
             }
+            return array; // Вернём массив
         }
     }
 }
