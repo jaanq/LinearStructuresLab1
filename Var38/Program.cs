@@ -4,18 +4,28 @@ namespace Var38
 {           // Массив, Стек, Быстрая сортировка Хоару (c медианным (pivot) элемнтом)
     class Program
     {
+        static Random rnd = new Random();
         static void Main(string[] args)
         {
-            Stack stack = new Stack(5);
-            stack.Push(1);
-            stack.Push(10);
-            stack.Push(22);
-            stack.Push(2);
-            stack.Push(5);
-            stack.Push(100);
-            stack.Show();
-            Stack.QSort(stack.ToArray());
-            stack.Show();
+            foreach (int N in new int[] { 3000, 60000, 120000, 240000, 480000, 9600000 })
+            {
+                Stack st = new Stack(N);
+                AddNrandoms(st, N);
+
+                DateTime before = DateTime.Now;
+                Stack.StartQSort(ref st);
+                double time = (DateTime.Now - before).TotalMilliseconds;
+
+                Console.WriteLine($"N: {N} TotalMilliseconds: {time}");
+            }
+        }
+
+        static void AddNrandoms(Stack q, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                q.Push(rnd.Next(1, 1000000));
+            }
         }
     }
 }

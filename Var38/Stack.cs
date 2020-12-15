@@ -4,40 +4,49 @@ namespace Var38
 {
     class Stack
     {
-        int[] storage;
-        int length;
-        int maxlength;
+        int[] storage; // 0 <=> null <=> None <=> non-init <=> пусто
+        int head_pos_cur; // Текущая позиция головки
+        int head_pos_max; // Максимальная позиция головки
+        int size = 0; // Текущее кол-во элементов
         public Stack(int n)
         {
             storage = new int[n];
-            maxlength = n;
-            length = n-1;
+            for (int i = 0; i < n; i++) { storage[i] = 0; } // Заполняем пустыми значениями
+            head_pos_max = n - 1;
+            head_pos_cur = n; // При обращении к головке используется "-1" => ставим текущую на ='n'
         }
 
-        public void Push(int input)
+        public void Push(int item)
         {
-            storage[length] = input;
-            if (length != 0)
+            if (head_pos_cur == 0 & storage[0] == 0) // Если мы в конце очереди и конец пустой
+            { // Без этого условия можно было бы изменять конец заполненной очереди
+                storage[head_pos_cur - 1] = item;
+                size++;
+            }
+            if (head_pos_cur != 0)
             {
-                length--;
+                storage[head_pos_cur - 1] = item;
+                head_pos_cur--;
+                size++;
             }
         }
         public int Pop()
         {
-            int toReturn = storage[length];
-            //Array.Clear(storage, length,maxlength);
-            storage[length] = 0;
-            if (length != maxlength - 1)
+            int toReturn = storage[head_pos_max]; // Макс, тк очередь двигается к правому краю
+
+            storage[head_pos_cur] = 0;
+            size--;
+            if (head_pos_cur != head_pos_max)
             {
-                length++;
+                head_pos_cur++;
             }
             return toReturn;
         }
         public int Peek()
         {
-            return storage[length];
+            return storage[head_pos_cur];
         }
-        public int Length() { return maxlength; }
+        public int Length() { return head_pos_max+1; }
         public void Show()
         {
             foreach (int x in storage){
@@ -48,6 +57,15 @@ namespace Var38
         public int[] ToArray()
         {
             return storage;
+        }
+
+
+
+
+        // Sorting block
+        static internal void StartQSort(ref Stack st) // Метод для запуска сортировки
+        {
+            QSort(st.ToArray());
         }
         static void Swap(ref int a, ref int b)
         {
