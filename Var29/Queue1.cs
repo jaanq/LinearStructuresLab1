@@ -132,28 +132,28 @@ namespace Var29
         static internal void StartQSort(ref Queue1 ex) // Метод для запуска сортировки
         {
             Program.N_op += 1;
-            quickSort(ex,0,ex.Length()-1);
+            quickSort(ex.ToArray(),0,ex.Length()-1);
         }
-        static void Swap(Queue1 q,
+        static void Swap(int[] array,
                  int position1,
                  int position2)
         {
             // Swaps elements in an array
 
             // Copy the first position's element
-            int temp = q.Get(position1);
+            int temp = array[position1];
 
             // Assign to the second element
-            q.Set(position1, q.Get(position2));
+            array[position1] = array[position2];
 
             // Assign to the first element
-            q.Set(position2,temp);
+            array[position2] = temp;
             Program.N_op += 10;
         }
-        static int partition(Queue1 q, int low,
+        static int partition(int[] arr, int low,
                                 int high)
         {
-            int pivot = q.Get(high);
+            int pivot = arr[high];
             Program.N_op += 7;
             // Index of smaller element
             int i = (low - 1);
@@ -162,31 +162,31 @@ namespace Var29
             {
                 // If current element is smaller
                 // than or equal to pivot
-                if (q.Get(j) <= pivot)
+                if (arr[j] <= pivot)
                 {
                     i++; // increment index of
                          // smaller element
-                    Swap(q, i, j);
+                    Swap(arr, i, j);
                     Program.N_op += 9;
                 }
             }
-            Swap(q, i + 1, high);
+            Swap(arr, i + 1, high);
             Program.N_op += 2;
             return (i + 1);
         }
-        static void quickSort(Queue1 q, int low,
+        static void quickSort(int[] arr, int low,
                                  int high)
         {
             if (low < high)
             {
                 /* pi is partitioning index, 
                 arr[p] is now at right place */
-                int pi = partition(q, low, high);
+                int pi = partition(arr, low, high);
                 Program.N_op += 7;
                 // Separately sort elements before
                 // partition and after partition
-                quickSort(q, low, pi - 1);
-                quickSort(q, pi + 1, high);
+                quickSort(arr, low, pi - 1);
+                quickSort(arr, pi + 1, high);
             }
         }
         internal void Clear() // Инкапсулированное обнуление для соответствия АТД
