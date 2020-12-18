@@ -1,0 +1,7 @@
+C:\Users\rusla\source\repos\LinearStructuresLab1\Var29\bin\Debug\Var29.exe.config
+C:\Users\rusla\source\repos\LinearStructuresLab1\Var29\bin\Debug\Var29.exe
+C:\Users\rusla\source\repos\LinearStructuresLab1\Var29\bin\Debug\Var29.pdb
+C:\Users\rusla\source\repos\LinearStructuresLab1\Var29\obj\Debug\Var29.csprojAssemblyReference.cache
+C:\Users\rusla\source\repos\LinearStructuresLab1\Var29\obj\Debug\Var29.csproj.CoreCompileInputs.cache
+C:\Users\rusla\source\repos\LinearStructuresLab1\Var29\obj\Debug\Var29.exe
+C:\Users\rusla\source\repos\LinearStructuresLab1\Var29\obj\Debug\Var29.pdb

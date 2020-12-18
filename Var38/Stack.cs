@@ -70,7 +70,15 @@ namespace Var38
             }
             return true;
         }
+        public int Get(int index)
+        {
+            throw new NotImplementedException();
+        }
 
+        public int Set(int index)
+        {
+            throw new NotImplementedException();
+        }
 
 
 

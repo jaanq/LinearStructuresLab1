@@ -15,7 +15,7 @@ namespace Var38
                 DateTime before = DateTime.Now; // Запоминается текущее время
                 Stack.StartQSort(ref st); // Старт сортировки 
                 double time = (DateTime.Now - before).TotalMilliseconds; // !Текущее! время минус запомненное
-            
+                
                 Console.WriteLine($"N: {N} TotalMilliseconds: {time} N_ops:{N_op}");
             }
         }
