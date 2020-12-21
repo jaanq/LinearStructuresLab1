@@ -11,7 +11,6 @@ namespace Var29 // Массив, Очередь, Квиксорт
                 N_op = 0;
                 Queue1 qu = new Queue1(N);
                 AddNrandoms(qu, N);
-                
                 DateTime before = DateTime.Now;
                 Queue1.StartQSort(ref qu);
                 double time = (DateTime.Now - before).TotalMilliseconds;
