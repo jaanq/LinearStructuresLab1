@@ -1,0 +1,7 @@
+C:\Users\rusla\source\repos\LinearStructuresLab1\Lab2_var38\bin\Debug\Lab2_var38.exe.config
+C:\Users\rusla\source\repos\LinearStructuresLab1\Lab2_var38\bin\Debug\Lab2_var38.exe
+C:\Users\rusla\source\repos\LinearStructuresLab1\Lab2_var38\bin\Debug\Lab2_var38.pdb
+C:\Users\rusla\source\repos\LinearStructuresLab1\Lab2_var38\obj\Debug\Lab2_var10.csprojAssemblyReference.cache
+C:\Users\rusla\source\repos\LinearStructuresLab1\Lab2_var38\obj\Debug\Lab2_var10.csproj.CoreCompileInputs.cache
+C:\Users\rusla\source\repos\LinearStructuresLab1\Lab2_var38\obj\Debug\Lab2_var38.exe
+C:\Users\rusla\source\repos\LinearStructuresLab1\Lab2_var38\obj\Debug\Lab2_var38.pdb
